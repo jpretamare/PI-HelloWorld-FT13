@@ -1,11 +1,7 @@
 const { Router } = require('express');
-const { Country, Turism } = require('../db.js');
+const {activ} = require('../control/index')
 const router = Router();
 
-let asd//AUXILIAR VARIABLE
-
-router.post('/activities', async(req,res) => {
-
-})
+router.post('/', activ)
 
 module.exports = router;

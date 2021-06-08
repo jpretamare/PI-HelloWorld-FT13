@@ -18,5 +18,12 @@ describe('Country model', () => {
         Country.create({ name: 'Argentina' });
       });
     });
+    describe('area', () => {
+      it('area deberia ser solo de numeros', (done) => {
+        Country.create({area: 'asd'})
+        .then(() => done(new Error(`That isn't a number`)))
+        .catch(() => done());
+      })
+    })
   });
 });
