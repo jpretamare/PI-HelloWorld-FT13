@@ -32,7 +32,7 @@ const get = async (req, res) => {
     }
     if (req.query.name) {
         try {
-            // FALTA DEFINIR COMO BUSCAR QUE LA BUSQUEDA NO SEA EXACTA
+            // FALTA DEFINIR COMO HACER QUE LA BUSQUEDA NO SEA EXACTA
             asd = await Country.findAll({where: {name: req.query.name}})
         } catch {
             return res.status(404).json({message: 'la database tiene amsiedad, no encontro nada'})
