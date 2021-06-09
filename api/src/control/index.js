@@ -2,6 +2,7 @@ const axios = require('axios');
 const { Country, Turism } = require('../db.js');
 
 let asd//AUXILIAR VARIABLE
+
 const get = async (req, res) => {
     asd = await Country.findAll({limit:10}) 
     if (asd.length === 0){
@@ -14,7 +15,7 @@ const get = async (req, res) => {
            img: c.flag,
            capital: c.capital
        }))
-       return res.redirect(`/countries${req.query.p ? '?p='+req.query.p : ''}`)
+       return res.redirect(`/countries${req.query.p ? '?p='+req.query.p : req.query.name ? '?name='+req.query.name : ''}`)
     } catch {
         return res.status(418).json({message: `i'm a teapot`})
     }
@@ -31,6 +32,7 @@ const get = async (req, res) => {
     }
     if (req.query.name) {
         try {
+            // FALTA DEFINIR COMO BUSCAR QUE LA BUSQUEDA NO SEA EXACTA
             asd = await Country.findAll({where: {name: req.query.name}})
         } catch {
             return res.status(404).json({message: 'la database tiene amsiedad, no encontro nada'})
@@ -52,7 +54,7 @@ const pais = async (req, res) => {
 }
 
 const activ = async(req,res) => {
-    
+    // HAY QUE ARMAR ESTE POST
 }
 
 module.exports = {
