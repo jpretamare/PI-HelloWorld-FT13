@@ -1,5 +1,6 @@
 const axios = require('axios');
 const { Country, Turism } = require('../db.js');
+const { v4: uuidv4 } = require('uuid');
 
 let asd//AUXILIAR VARIABLE
 
@@ -46,6 +47,21 @@ const pais = async (req, res) => {
     let {idPais} = req.params;
     let {data} = await axios(`https://restcountries.eu/rest/v2/alpha/${idPais}`);
     const con = await Country.findByPk(idPais, {include: Turism})
+    if (!con){
+        try {
+            let {data} = await axios('https://restcountries.eu/rest/v2/all')
+            await data.forEach(c => Country.create({
+               id: c.alpha3Code,
+               name: c.name,
+               continent: c.region,
+               img: c.flag,
+               capital: c.capital
+           }))
+           return res.redirect(`/countries/${idPais}`)
+        } catch {
+            res.json({message: 'todo ha fallado!'})
+        }
+    }
     con.subReg = data.subregion;
     con.area = data.area;
     con.pob =  data.population;
@@ -55,6 +71,8 @@ const pais = async (req, res) => {
 
 const activ = async(req,res) => {
     // HAY QUE ARMAR ESTE POST
+    let id = uuidv4();
+
 }
 
 module.exports = {

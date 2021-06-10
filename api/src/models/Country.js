@@ -6,6 +6,8 @@ const { DataTypes } = require('sequelize');
 //   c.name.length === 0 || c.continent.length === 0 || c.capital.length === 0 || c.img.length === 0 ? new Error('It requires') : ''
 // })
 
+//HACER LAS VALIDACIONES
+
 module.exports = (sequelize) => {
   sequelize.define('Turism', {
     id:{

@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const {get, pais} = require('../control/index.js')
+const { get, pais } = require('../control/index.js')
 const router = Router()
 
 router.get('/', get)
