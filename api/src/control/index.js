@@ -5,10 +5,10 @@ const { Sequelize } = require('sequelize');
 const Op = Sequelize.Op
 
 let asd//AUXÍLIAME VARIABLE
-let x = 0;// X = LLamo o no llamo 
+let swap = false;
 
 const get = async (req, res) => {
-    if (x !== 1){
+    if (!swap){
        try {
         let {data} = await axios('https://restcountries.eu/rest/v2/all')
         await data.forEach(c => Country.create({
@@ -18,7 +18,7 @@ const get = async (req, res) => {
            img: c.flag,
            capital: c.capital
        }))
-	   x=1
+	   swap = true
        return res.redirect(`/countries${req.query.p ? '?p='+req.query.p : req.query.name ? '?name='+req.query.name : ''}`)
     } catch {
         return res.status(418).json({status: 418, message: `i'm a teapot`})
@@ -27,14 +27,17 @@ const get = async (req, res) => {
     if (req.query.p){
         try {
 			if (req.query.p === 'all') {
-            asd = await Country.findAll()
-            return res.json(asd)
-        }
-        let num = req.query.p *10
-        asd = await Country.findAll({limit:num})
-		if (num > asd.length){asd.splice(0, asd.length -10)} else{
-        asd.splice(0, num-10)}
-        return res.status(200).json(asd);
+            	asd = await Country.findAll()
+            	return res.json(asd)
+        	}
+        	let num = req.query.p *10
+        	asd = await Country.findAll({limit:num})
+			if (num > asd.length){
+				asd.splice(0, asd.length -10)
+			} else {
+        		asd.splice(0, num-10)
+			}
+        	return res.status(200).json(asd);
 		} catch {
 			return res.status(400).json({message: 'Bad Request', status: 400})
 		}
@@ -54,9 +57,10 @@ const get = async (req, res) => {
 const pais = async (req, res) => {
     let {idPais} = req.params;
 	idPais = idPais.toUpperCase()
-    try {asd = await axios(`https://restcountries.eu/rest/v2/alpha/${idPais}`)} catch {return res.status(400).json({status: 400, message:'Bad Request'})}
+    try {asd = await axios(`https://restcountries.eu/rest/v2/alpha/${idPais}`)} 
+	catch {return res.status(400).json({status: 400, message:'Bad Request'})}
     const con = await Country.findByPk(idPais, {include: Turism})
-    if (con === null && x !== 1){
+    if (con === null && !swap){
         try {
             asd = await axios('https://restcountries.eu/rest/v2/all')
             await asd.data.forEach(c => Country.create({
@@ -66,7 +70,7 @@ const pais = async (req, res) => {
                img: c.flag,
                capital: c.capital
            }))
-		   x = 1
+		   swap = true
            return res.redirect(`/countries/${idPais}`)
         } catch {
             res.json({message: 'todo ha fallado!'})
