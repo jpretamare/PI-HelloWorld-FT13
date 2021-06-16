@@ -5,33 +5,39 @@ const { Sequelize } = require('sequelize');
 const Op = Sequelize.Op
 
 let asd//AUXÍLIAME VARIABLE
-let swap = false;
 
 const get = async (req, res) => {
-    if (!swap){
-       try {
-        let {data} = await axios('https://restcountries.eu/rest/v2/all')
-        await data.forEach(c => Country.create({
-           id: c.alpha3Code,
-           name: c.name,
-           continent: c.region,
-           img: c.flag,
-           capital: c.capital
-       }))
-	   swap = true
-       return res.redirect(`/countries${req.query.p ? '?p='+req.query.p : req.query.name ? '?name='+req.query.name : ''}`)
-    } catch {
-        return res.status(418).json({status: 418, message: `i'm a teapot`})
+    if (req.query.cont) {
+        try {
+            asd = await Country.findAll({where: {continent: {[Op.iLike]:`%${req.query.cont}%`}}})
+            return res.status(200).json(asd)
+        } catch {
+            return res.status(500).json({message:'Internal Error'})
+        }
     }
-    }
+    if(req.query.tur){
+        try {
+		    asd = await Country.findAll({
+			    include:{
+				    model: Turism,
+				    where: {
+					    name: {[Op.iLike]:`%${req.query.tur}%`}
+				    },
+				    required: true
+			    }
+		    })
+		    return res.status(200).json(asd)
+        } catch {
+            return res.status(500).json({message:'Internal Error'})
+        }
+	}
     if (req.query.p){
         try {
 			if (req.query.p === 'all') {
-            	asd = await Country.findAll()
+                asd = await Country.findAll()
             	return res.json(asd)
         	}
         	let num = req.query.p *10
-        	asd = await Country.findAll({limit:num})
 			if (num > asd.length){
 				asd.splice(0, asd.length -10)
 			} else {
@@ -45,57 +51,50 @@ const get = async (req, res) => {
     if (req.query.name) {
         try {
             asd = await Country.findAll({where: {name: {[Op.iLike]:`%${req.query.name}%`}}})
+            if (asd.length === 0) {return res.status(400).json({message: 'Bad Request', status:500})}
         } catch {
-            return res.status(404).json({message: 'la asdbase tiene amsiedad, no encontro nada'})
+            return res.status(404).json({message: 'la database tiene amsiedad, no encontro nada'})
         }
         return res.status(200).json(asd);
     }
-	asd = await Country.findAll({limit:10}) 
-    res.status(200).json(asd)
+	try {
+        asd = await Country.findAll({limit:10}) 
+        res.status(200).json(asd)
+    } catch {
+        return res.status(500).json({status:500, message:'Falló la sincronización con la DB'})
+    }
 }
 
 const pais = async (req, res) => {
     let {idPais} = req.params;
 	idPais = idPais.toUpperCase()
-    try {asd = await axios(`https://restcountries.eu/rest/v2/alpha/${idPais}`)} 
-	catch {return res.status(400).json({status: 400, message:'Bad Request'})}
-    const con = await Country.findByPk(idPais, {include: Turism})
-    if (con === null && !swap){
-        try {
-            asd = await axios('https://restcountries.eu/rest/v2/all')
-            await asd.data.forEach(c => Country.create({
-               id: c.alpha3Code,
-               name: c.name,
-               continent: c.region,
-               img: c.flag,
-               capital: c.capital
-           }))
-		   swap = true
-           return res.redirect(`/countries/${idPais}`)
-        } catch {
-            res.json({message: 'todo ha fallado!'})
-        }
+    try {
+        asd = await axios(`https://restcountries.eu/rest/v2/alpha/${idPais}`)
+    } catch {
+        return res.status(400).json({status: 400, message:'Bad Request'})
     }
-    con.subReg = asd.data.subregion;
-    con.area = asd.data.area;
-    con.pob =  asd.data.population;
-    await con.save();
-    res.status(200).json(con);
+    try {
+        const con = await Country.findByPk(idPais, {include: Turism})
+        con.subReg = asd.data.subregion;
+        con.area = asd.data.area;
+        con.pob =  asd.data.population;
+        await con.save();
+        return res.status(200).json(con);
+    } catch {
+        return res.status(500).json({status:500, message: 'In/Out DataBase Error'})
+    }
 }
 
 const activ = async(req,res) => {
     let id = uuidv4();
     const country = {...req.body, id};
     if(!req.body.name || !req.body.level || !req.body.duration || !req.body.temp || !req.body.paises) {
-        return res.send({
-            message: 'Es necesaria la información',
-        });
+        return res.status(400).send({status: 400, message: 'Bad Request'});
     }
     try {
         let turis= await Turism.create(country);
         let {paises} = req.body
-		asd = paises.split(',')
-		await asd.forEach(p => {
+		await paises.forEach(p => {
 			p = p.toUpperCase()
 			turis.addCountry(p, {through: 'country_turism'});
 		})
@@ -106,8 +105,24 @@ const activ = async(req,res) => {
 
 }
 
+const connect = async (req, res) => {
+    try {
+        const {data} = await axios('https://restcountries.eu/rest/v2/all')
+        await data.forEach(c => Country.create({
+       id: c.alpha3Code,
+       name: c.name,
+       continent: c.region,
+       img: c.flag,
+       capital: c.capital
+   }))
+} catch {
+    return res.status(500).json({message: 'Internal Error', status: 500})
+}
+}
+
 module.exports = {
     get,
     pais,
-    activ
+    activ,
+    connect
 }
