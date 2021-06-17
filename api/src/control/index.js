@@ -53,7 +53,7 @@ const get = async (req, res) => {
             asd = await Country.findAll({where: {name: {[Op.iLike]:`%${req.query.name}%`}}})
             if (asd.length === 0) {return res.status(400).json({message: 'Bad Request', status:500})}
         } catch {
-            return res.status(404).json({message: 'la database tiene amsiedad, no encontro nada'})
+            return res.status(500).json({message: 'la database tiene amsiedad, no encontro nada'})
         }
         return res.status(200).json(asd);
     }
@@ -69,19 +69,10 @@ const pais = async (req, res) => {
     let {idPais} = req.params;
 	idPais = idPais.toUpperCase()
     try {
-        asd = await axios(`https://restcountries.eu/rest/v2/alpha/${idPais}`)
+        asd = await Country.findByPk(idPais, {include: Turism})
+        return res.status(200).json(asd);
     } catch {
         return res.status(400).json({status: 400, message:'Bad Request'})
-    }
-    try {
-        const con = await Country.findByPk(idPais, {include: Turism})
-        con.subReg = asd.data.subregion;
-        con.area = asd.data.area;
-        con.pob =  asd.data.population;
-        await con.save();
-        return res.status(200).json(con);
-    } catch {
-        return res.status(500).json({status:500, message: 'In/Out DataBase Error'})
     }
 }
 
@@ -102,27 +93,41 @@ const activ = async(req,res) => {
     } catch {
         return res.status(500).json({message: 'Internal Server Error', status: 500});
     }
+}
 
+const tur = async(req,res) => {
+    try {
+        asd = await Turism.findAll()
+        console.log(asd)
+        if (asd.length === 0) {return res.status(400).json({message: 'Bad Request'})}
+        return res.status(200).json(asd)
+    } catch {
+        return res.status(500).json({message: 'Internal Server Error'})
+    }
 }
 
 const connect = async (req, res) => {
     try {
         const {data} = await axios('https://restcountries.eu/rest/v2/all')
         await data.forEach(c => Country.create({
-       id: c.alpha3Code,
-       name: c.name,
-       continent: c.region,
-       img: c.flag,
-       capital: c.capital
-   }))
-} catch {
-    return res.status(500).json({message: 'Internal Error', status: 500})
-}
+            id: c.alpha3Code,
+            name: c.name,
+            continent: c.region,
+            img: c.flag,
+            capital: c.capital,
+            subReg: c.subregion,
+            area: c.area,
+            pob:  c.population
+        }))
+    } catch {
+        return res.status(500).json({message: 'Internal Error', status: 500})
+    }
 }
 
 module.exports = {
     get,
     pais,
     activ,
+    tur,
     connect
 }
