@@ -10,8 +10,7 @@ const Landing = () => {
     return (
         <div className='background'>
             <Link to='/home'> 
-            <button className='welcome' onClick={() => {dispatch(Tod())}}>
-            </button>
+            <button className='welcome' onClick={() => {dispatch(Tod())}}>Into The World</button>
             </Link>
         </div>
     )

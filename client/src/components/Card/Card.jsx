@@ -11,15 +11,13 @@ const Card = ({name, id, img, continent}) => {
 
     return (
         <div className='target'>
-        
             <div className='card'>
                 <span className='name'>{name}</span>
                 <span className='cont'>{continent}</span>
                 <img className='img' src={img} alt={name}/>
             </div>
             <Link to={`/home/detalles/${id}`}> 
-                <button onClick={() => {dispatch(Detalle(id))}}>
-                </button>
+                <button className='buttonLink' onClick={() => {dispatch(Detalle(id))}}/>
             </Link>
         </div>
     )

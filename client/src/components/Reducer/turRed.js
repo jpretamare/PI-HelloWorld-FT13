@@ -1,4 +1,4 @@
-import {TURISM, TURISMALL} from "../actions/actionName"
+import {TURISM, TURISMALL, LIST} from "../actions/actionName"
 
 const initialState = {
     turis: [],
@@ -12,6 +12,11 @@ export default function turRed (state = initialState, action) {
                 turis: action.payload
             }
         case TURISMALL:
+            return {
+                ...state,
+                turis: action.payload
+            }
+        case LIST:
             return {
                 ...state,
                 turis: action.payload

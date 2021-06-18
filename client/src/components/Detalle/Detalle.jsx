@@ -1,23 +1,28 @@
 import React from 'react'
-// import { Link } from 'react-router-dom';
 import {useSelector} from 'react-redux'
 import Activ from '../actTur/actTur'
+import { Link } from 'react-router-dom';
 
 
 const Detalle = () => {
-   const detalle = useSelector(state => state.detRed.detalle)
+    const detalle = useSelector(state => state.detRed.detalle)
 
     return (
         <div className='backgroundDet'>
-            <span className='id'>{detalle.id}</span>
-            <h1 className='name'>{detalle.name}</h1>
+            <Link to='/home'><button>Home</button></Link>
+            <span className='id'>Code: {detalle.id}</span>
+            <h1 className='name'>Name: {detalle.name}</h1>
             <img src={detalle.img} alt={detalle.name}/>
             <div className='info'>
-                <span className='continent'>{detalle.continent}</span>
-                <span className='capital'>{detalle.capital}</span>
-                <span className='area'>{detalle.area}</span>
-                <span className='pob'>{detalle.pob}</span>
-                <span className='subreg'>{detalle.subReg}</span>
+                <span className='continent'>Continent: {detalle.continent}</span>
+                <br/>
+                <span className='capital'>Capital: {detalle.capital}</span>
+                <br/>
+                <span className='area'>Area: {detalle.area} Km2</span>
+                <br/>
+                <span className='pob'>Population: {detalle.pob}</span>
+                <br/>
+                <span className='subreg'>Subregion: {detalle.subReg}</span>
             </div>
             <div className='activities'>
             {

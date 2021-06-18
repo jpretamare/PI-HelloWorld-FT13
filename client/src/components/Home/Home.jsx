@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Search from '../Search/Search'
 import Countries from '../countries/countries'
 import Filters from '../filters/filters';
+import Orders from '../Orders/orders'
 
 function Home() {
 
@@ -10,7 +11,7 @@ function Home() {
     <div className='Home'>
       <div className='nav'>
           <Link to='/home/crear'>
-            <button className='Form'>Actividad Nueva</button>
+            <button className='Form'>New Activity</button>
           </Link>
       </div>
       <div>
@@ -19,6 +20,9 @@ function Home() {
         </div>
           <div className='filtros'>
             <Filters/>
+          </div>
+          <div>
+            <Orders/>
           </div>
       </div>
       <div className='cards'>

@@ -78,16 +78,21 @@ const pais = async (req, res) => {
 
 const activ = async(req,res) => {
     let id = uuidv4();
-    const country = {...req.body, id};
     if(!req.body.name || !req.body.level || !req.body.duration || !req.body.temp || !req.body.paises) {
         return res.status(400).send({status: 400, message: 'Bad Request'});
     }
     try {
-        let turis= await Turism.create(country);
+        let turis= await Turism.create({
+            name: req.body.name,
+            temp: req.body.temp,
+            level: req.body.level,
+            id : id,
+            duration: req.body.duration
+        });
         let {paises} = req.body
 		await paises.forEach(p => {
 			p = p.toUpperCase()
-			turis.addCountry(p, {through: 'country_turism'});
+			turis.addCountry(p9, {through: 'country_turism'});
 		})
 		return res.status(201).json({message: 'Actividad creada', status: 201});
     } catch {
@@ -97,7 +102,7 @@ const activ = async(req,res) => {
 
 const tur = async(req,res) => {
     try {
-        asd = await Turism.findAll()
+        asd = await Turism.findAll({include: {model: Country}})
         console.log(asd)
         if (asd.length === 0) {return res.status(400).json({message: 'Bad Request'})}
         return res.status(200).json(asd)
