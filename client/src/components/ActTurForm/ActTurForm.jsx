@@ -69,7 +69,7 @@ const Turismo = () => {
                     <option value={c.id} name="c.name">{c.name}</option>
                     ))}
                 </select>
-                <div>
+                <div className='listSelect'>
                     <span>Id of select countries</span>
                     <br/>
                         {

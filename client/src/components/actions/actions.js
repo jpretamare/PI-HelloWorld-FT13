@@ -104,11 +104,11 @@ export function DescAbc(props){
     }
 }
 
-export function AgrAct(props, props2) {
+export function AgrAct(props, paises) {
     return (dispatch) => {
-    let body = {...props, props2}
+    let body = {...props, paises}
     body = JSON.stringify(body)
     axios({method: 'post', url: "http://localhost:3001/activities/new",headers: {'Content-Type': 'application/json'} , data: body}) 
-    .then(dispatch({type:LIST}))
     .then(window.location.href = "http://localhost:3000/home")
+    .then(dispatch({type:LIST}))
 }}

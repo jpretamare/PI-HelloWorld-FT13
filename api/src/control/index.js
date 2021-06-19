@@ -86,9 +86,6 @@ const activ = async(req,res) => {
     try {
         let turis= await Turism.create(asd);
         let {paises} = req.body
-        paises = paises.replace(/\[+/g, '')
-        paises = paises.replace(/\]+/g, '')
-        paises = paises.split(',')
 		await paises.forEach(p => {
 			p = p.toUpperCase()
 			turis.addCountry(p, {through: 'country_turism'});

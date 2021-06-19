@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {Tur, TurAll, Cont} from '../actions/actions'
 
 const Filters = () => {
     const tur = useSelector(state => state.turRed.turis)
     const dispatch = useDispatch()
+	const [turis] = useState(tur)
 	
     useEffect(() => {
-		if (!tur) {
+		return () => {
 			dispatch(TurAll())
 		}
-    }, [tur])
+    }, [turis])
 
     function filCont(e) {
 		dispatch(Cont(e.target.value))
@@ -32,7 +33,7 @@ const Filters = () => {
 		    </select>
             <select className="filTur" name="turism" onChange={filTur}>
 	  			<option value="">Filter by Activity Turistic</option>
-	  			{tur && tur.map(s => (
+	  			{turis && turis.map(s => (
 	  			<option value={s.name}>{s.name}</option>
 	  			))}
   			</select>
