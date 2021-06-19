@@ -1,12 +1,13 @@
 import React from 'react'
+import './Activ.css'
 
 const ActTur = ({name, level, duration, temp}) => {
     return (
         <div className='Activ'>
-            <span className='name'>{name}</span>
-            <span className='level'>{level}</span>
-            <span className='duration'>{duration}</span>
-            <span className='temp'>{temp}</span>
+            <span className='na'>{name}</span>
+            <span className='le'>{level}</span>
+            <span className='du'>{duration}</span>
+            <span className='te'>{temp}</span>
         </div>
     )
 }

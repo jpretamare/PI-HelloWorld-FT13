@@ -4,6 +4,7 @@ import Search from '../Search/Search'
 import Countries from '../countries/countries'
 import Filters from '../filters/filters';
 import Orders from '../Orders/orders'
+import './Home.css'
 
 function Home() {
 

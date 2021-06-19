@@ -1,6 +1,7 @@
 import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {Tod, AscAbc, AscPob, DescAbc, DescPob} from '../actions/actions'
+import './orders.css'
 
 const Orders = () => {
 
@@ -9,11 +10,11 @@ const Orders = () => {
 
   return (
     <div className='checks'>
-        <button onClick={() => {dispatch(AscPob(countries))}}>Ascendent for population</button>
-        <button onClick={() => {dispatch(DescPob(countries))}}>Descendent for population</button>
-        <button onClick={() => {dispatch(AscAbc(countries))}}>Ascendent for name</button>
-        <button onClick={() => {dispatch(DescAbc(countries))}}>Descendent for name</button>
-        <button onClick={() => {dispatch(Tod())}}>Quit filters</button>
+        <button className='butt' onClick={() => {dispatch(AscPob(countries))}}>Ascendent for population</button>
+        <button className='butt' onClick={() => {dispatch(DescPob(countries))}}>Descendent for population</button>
+        <button className='butt' onClick={() => {dispatch(AscAbc(countries))}}>Ascendent for name</button>
+        <button className='butt' onClick={() => {dispatch(DescAbc(countries))}}>Descendent for name</button>
+        <button className='butt' onClick={() => {dispatch(Tod())}}>Quit filters</button>
     </div>
   )
 }

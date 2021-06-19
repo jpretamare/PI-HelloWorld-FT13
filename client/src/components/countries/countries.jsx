@@ -2,6 +2,7 @@ import React,{useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import Card from '../Card/Card'
 import {Tod} from '../actions/actions'
+import './countries.css'
 
 const Countries = () => {
     const [numPag, setNumPag] = useState(1)

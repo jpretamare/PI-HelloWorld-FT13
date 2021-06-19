@@ -2,6 +2,7 @@ import React,{useState, useEffect} from 'react'
 import {AscAbc, Tod, AgrAct} from '../actions/actions';
 import {useDispatch, useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
+import './act.css'
 
 const Turismo = () => {
     const [input, setInput] = useState({
@@ -38,10 +39,10 @@ const Turismo = () => {
             <Link to='/home'><button>Home</button></Link>
             <form onSubmit={() => {dispatch(AgrAct(input, paises))}}>
             <div>
-                <input type='text' placeholder='Name for activity' className='name' name='name' onChange={handle} value={input.name} required/>
+                <input type='text' placeholder='Name for activity' className='nam' name='name' onChange={handle} value={input.name} required/>
             </div>
             <div>
-                <input type='number 'placeholder='Duration in minuts' className='duration' name='duration' onChange={handle} value={input.duration} required/>
+                <input type='number 'placeholder='Duration in minuts' className='dur' name='duration' onChange={handle} value={input.duration} required/>
             </div>
             <div>
                 <select className="selectLevel" name="level" value={input.level} onChange={handle} required>

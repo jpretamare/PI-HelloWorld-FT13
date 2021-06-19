@@ -2,6 +2,7 @@ import React from 'react'
 import {useSelector} from 'react-redux'
 import Activ from '../actTur/actTur'
 import { Link } from 'react-router-dom';
+import './Detalle.css'
 
 
 const Detalle = () => {
@@ -9,10 +10,10 @@ const Detalle = () => {
 
     return (
         <div className='backgroundDet'>
-            <Link to='/home'><button>Home</button></Link>
+            <Link to='/home'><button className='back'>Home</button></Link>
             <span className='id'>Code: {detalle.id}</span>
             <h1 className='name'>Name: {detalle.name}</h1>
-            <img src={detalle.img} alt={detalle.name}/>
+            <img className='img' src={detalle.img} alt={detalle.name}/>
             <div className='info'>
                 <span className='continent'>Continent: {detalle.continent}</span>
                 <br/>

@@ -2,8 +2,7 @@ import React from 'react'
 import {useDispatch} from 'react-redux'
 import { Link } from 'react-router-dom';
 import {Detalle} from '../actions/actions'
-
-
+import './Card.css'
 
 const Card = ({name, id, img, continent}) => {
 

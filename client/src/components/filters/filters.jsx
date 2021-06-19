@@ -1,6 +1,7 @@
 import React, { useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {Tur, TurAll, Cont} from '../actions/actions'
+import './filters.css'
 
 const Filters = () => {
     const tur = useSelector(state => state.turRed.turis)

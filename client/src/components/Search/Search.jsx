@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {Busq} from '../actions/actions'
+import './Search.css'
 
 const Search = () => {
   const [input, setInput]= useState({
