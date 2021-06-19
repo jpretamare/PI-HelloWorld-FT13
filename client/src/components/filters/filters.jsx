@@ -5,9 +5,11 @@ import {Tur, TurAll, Cont} from '../actions/actions'
 const Filters = () => {
     const tur = useSelector(state => state.turRed.turis)
     const dispatch = useDispatch()
-
+	
     useEffect(() => {
-        dispatch(TurAll())
+		if (!tur) {
+			dispatch(TurAll())
+		}
     }, [tur])
 
     function filCont(e) {

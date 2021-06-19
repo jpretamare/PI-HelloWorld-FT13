@@ -105,17 +105,10 @@ export function DescAbc(props){
 }
 
 export function AgrAct(props, props2) {
-    return  async (dispatch) => {
-    let asd = {
-        name: props.name,
-        level: props.level,
-        duration: props.duration,
-        temp: props.temp,
-        paises: props2.paises
-    }
-    let {data} = await fetch("http://localhost:3001/activities/new", {
-        method: 'POST',
-        body: asd
-    });
-    dispatch({type:LIST, payload: data})
+    return (dispatch) => {
+    let body = {...props, props2}
+    body = JSON.stringify(body)
+    axios({method: 'post', url: "http://localhost:3001/activities/new",headers: {'Content-Type': 'application/json'} , data: body}) 
+    .then(dispatch({type:LIST}))
+    .then(window.location.href = "http://localhost:3000/home")
 }}

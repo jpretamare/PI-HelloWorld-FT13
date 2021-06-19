@@ -10,9 +10,7 @@ const Turismo = () => {
 	    duration: "",
 	    temp: "",
  	})
-    const [paises, setPaises] = useState({
-        paises: [],
-    })
+    const [paises, setPaises] = useState([])
 
     const countries = useSelector(state => state.conRed.countries)
     const dispatch = useDispatch()
@@ -22,7 +20,7 @@ const Turismo = () => {
             dispatch(Tod())
             dispatch(AscAbc(countries))
         }
-    }, [paises.paises])
+    }, [paises])
 
     function handle(e) {
         setInput({
@@ -32,9 +30,7 @@ const Turismo = () => {
     }
 
     function handlePaises(e) {
-        setPaises({
-            paises: [...paises.paises, e.target.value]
-        })
+        setPaises(paises.concat(e.target.value))
     }
     
     return (
@@ -77,8 +73,8 @@ const Turismo = () => {
                     <span>Id of select countries</span>
                     <br/>
                         {
-                        paises.paises.length !== 0 ?
-                        paises.paises.map(c => (
+                        paises.length !== 0 ?
+                        paises.map(c => (
                         <span>{c}
                         <br/>
                         </span>

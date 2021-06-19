@@ -19,7 +19,7 @@ export default function turRed (state = initialState, action) {
         case LIST:
             return {
                 ...state,
-                turis: action.payload
+                turis: state
             }
         default:
             return state;
