@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import Card from '../Card/Card'
-import {Tod} from '../actions/actions'
+import {Tod, TurAll} from '../actions/actions'
 import './countries.css'
 
 const Countries = () => {
@@ -11,9 +11,13 @@ const Countries = () => {
 
     useEffect(() => {
         if (countries.length === 0) {
-            dispatch(Tod())
+            dispatch(Tod());
+            dispatch(TurAll())
         }
-    }, [dispatch])
+        return () => {
+            dispatch(TurAll())
+        }
+    }, [countries])
 
     let ren
     if (numPag*10 > countries.length){

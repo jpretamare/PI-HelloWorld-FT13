@@ -60,14 +60,14 @@ export function Cont(props){
 export function AscPob(props){
     return (dispatch) => {
         const countries = props.sort((a,b) => a.pob - b.pob)
-        dispatch({type: ASCPOB, payload: countries})
+        dispatch({type: ASCPOB, payload: [...countries]})
     }
 }
 
 export function DescPob(props){
     return (dispatch) => {
         const countries = props.sort((a,b) => b.pob - a.pob)
-        dispatch({type: DESCPOB, payload: countries})
+        dispatch({type: DESCPOB, payload: [...countries]})
     }
 }
 
@@ -84,9 +84,10 @@ export function AscAbc(props){
             }
             else {return 0}
         })
-        dispatch({type:ASCABC, payload: countries})
+        dispatch({type:ASCABC, payload: [...countries]})
     }
 }
+
 export function DescAbc(props){
     return async(dispatch) => {
         const countries = props.sort((a,b) => {
@@ -100,7 +101,7 @@ export function DescAbc(props){
             }
             else {return 0}
         })
-        dispatch({type:DESCABC, payload: countries})
+        dispatch({type:DESCABC, payload: [...countries]})
     }
 }
 

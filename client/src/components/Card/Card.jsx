@@ -14,10 +14,10 @@ const Card = ({name, id, img, continent}) => {
                 <span className='name'>{name}</span>
                 <span className='cont'>{continent}</span>
                 <img className='img' src={img} alt={name}/>
+                <Link to={`/home/detalles/${id}`}> 
+                    <button className='buttonLink' onClick={() => {dispatch(Detalle(id))}}/>
+                </Link>
             </div>
-            <Link to={`/home/detalles/${id}`}> 
-                <button className='buttonLink' onClick={() => {dispatch(Detalle(id))}}/>
-            </Link>
         </div>
     )
 }

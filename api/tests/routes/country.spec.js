@@ -22,3 +22,30 @@ describe('Country routes', () => {
     );
   });
 });
+
+describe('Ruta Post', () => {
+    before(() => conn.authenticate()
+    .catch((err) => {
+      console.error('Unable to connect to the database:', err);
+    }));
+    describe('POST /countries', () => {
+      it('responds with 200', () => agent.post('/countries').expect(200))
+      it('should return the detail of the country', (done) => 
+        agent.post('/countries')
+        .send({
+          paises: ["ARG","CHI"],
+          name: "surf",
+          level: "3",
+          duration: 30,
+          temp: "Invierno"
+          })
+          .then(function(res){
+            expect(res.body).to.deep.equal({
+            paises: ["ARG", "CHI"],
+            name: "surf",
+            level: "3",
+            duration: 30,
+            temp: "Invierno"
+            })
+    }))
+  })})

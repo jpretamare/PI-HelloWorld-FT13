@@ -9,6 +9,7 @@ const Filters = () => {
 	const [turis] = useState(tur)
 	
     useEffect(() => {
+		dispatch(TurAll())
 		return () => {
 			dispatch(TurAll())
 		}

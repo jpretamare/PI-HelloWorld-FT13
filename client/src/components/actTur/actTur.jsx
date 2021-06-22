@@ -1,5 +1,5 @@
 import React from 'react'
-import './Activ.css'
+import './actTur.css'
 
 const ActTur = ({name, level, duration, temp}) => {
     return (
