@@ -9,15 +9,20 @@ const Card = ({name, id, img, continent}) => {
     const dispatch = useDispatch()
 
     return (
-        <div className='target'>
+        <div className='row center'>
+            
             <div className='card'>
-                <span className='name'>{name}</span>
-                <span className='cont'>{continent}</span>
-                <img className='img' src={img} alt={name}/>
-                <Link to={`/home/detalles/${id}`}> 
-                    <button className='buttonLink' onClick={() => {dispatch(Detalle(id))}}/>
-                </Link>
+            <img className='img' src={img} alt={name}/>
+                <span className='card-body'>
+                    <h1>{name}</h1>
+                    <h4>{continent}</h4>
+                </span>
+                <Link to={`/home/detalles/${id}`}>   
+                    <button className='buttonLink' onClick={() => {dispatch(Detalle(id))}}>
+                        Details </button>
+                </Link>    
             </div>
+            
         </div>
     )
 }

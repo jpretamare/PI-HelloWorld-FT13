@@ -19,10 +19,10 @@ const Search = () => {
   const dispatch = useDispatch()
 
   return (
-        <div className='search'>
-          <input placeholder='Tell me' className='country' onChange={handleInput} value={input.value}></input>
-          <button className='boton_busq' onClick={() => {dispatch(Busq(input.title))}}>Search</button>
-        </div>
+      <div className='rightSide'>
+        <input placeholder='Tell me' className='country' onChange={handleInput} value={input.value}></input>
+        <button className='boton_busq' onClick={() => {dispatch(Busq(input.title))}}>Search</button>
+      </div>
   )
 }
 

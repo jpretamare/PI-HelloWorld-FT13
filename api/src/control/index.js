@@ -82,7 +82,6 @@ const activ = async(req,res) => {
     if(!req.body.name || !req.body.level || !req.body.duration || !req.body.temp) {
         return res.status(400).send({status: 400, message: 'Bad Request'});
     }
-    console.log(asd)
     try {
         let turis= await Turism.create(asd);
         let {paises} = req.body

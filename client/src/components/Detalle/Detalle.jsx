@@ -1,7 +1,6 @@
 import React from 'react'
 import {useSelector} from 'react-redux'
-import Activ from '../actTur/actTur'
-import { Link } from 'react-router-dom';
+import ActTur from '../actTur/actTur'
 import './Detalle.css'
 
 
@@ -10,26 +9,29 @@ const Detalle = () => {
 
     return (
         <div className='backgroundDet'>
-            <Link to='/home'><button className='back'>Home</button></Link>
+            <div className='car'>
             <span className='id'>Code: {detalle.id}</span>
             <h1 className='name'>Name: {detalle.name}</h1>
             <img className='img' src={detalle.img} alt={detalle.name}/>
-            <div className='info'>
-                <span className='continent'>Continent: {detalle.continent}</span>
+            </div>
+            <div className='car'>
+                <div className='car-body'>
+                <span className='inf'>Continent: {detalle.continent}</span>
                 <br/>
-                <span className='capital'>Capital: {detalle.capital}</span>
+                <span className='inf'>Capital: {detalle.capital}</span>
                 <br/>
-                <span className='area'>Area: {detalle.area} Km2</span>
+                <span className='inf'>Area: {detalle.area} Km2</span>
                 <br/>
-                <span className='pob'>Population: {detalle.pob}</span>
+                <span className='inf'>Population: {detalle.pob}</span>
                 <br/>
-                <span className='subreg'>Subregion: {detalle.subReg}</span>
+                <span className='inf'>Subregion: {detalle.subReg}</span>
+                </div>
             </div>
             <div className='activities'>
             {
-                detalle.turisms &&
-                detalle.turisms.forEach(x => (
-                    <Activ name={x.name} level={x.level} duration={x.duration} temp={x.temp} id={x.id}/>
+                detalle.Turisms && 
+                detalle.Turisms.map(x => (
+                    <ActTur name={x.name} level={x.level} duration={x.duration} temp={x.temp}/>
                 ))
             }
             </div>

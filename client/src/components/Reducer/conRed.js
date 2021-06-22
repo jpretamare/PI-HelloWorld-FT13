@@ -1,4 +1,4 @@
-import {INGRESO, PAG, BUSCADO, ALL, CONT, ASCPOB, DESCPOB, ASCABC, DESCABC} from "../actions/actionName"
+import {INGRESO, PAG, BUSCADO, ALL, CONT, ASCPOB, DESCPOB, ASCABC, DESCABC, TURISM} from "../actions/actionName"
 
 const initialState = {
     countries: [],
@@ -51,6 +51,11 @@ export default function conRed (state = initialState, action) {
                 ...state,
                 countries: action.payload
             }
+            case TURISM:
+                return {
+                    ...state,
+                    countries: action.payload
+                }
         default:
             return state;
     }

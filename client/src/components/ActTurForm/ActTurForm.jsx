@@ -1,7 +1,6 @@
 import React,{useState, useEffect} from 'react'
 import {AscAbc, Tod, AgrAct} from '../actions/actions';
 import {useDispatch, useSelector} from 'react-redux'
-import {Link} from 'react-router-dom'
 import './act.css'
 
 const Turismo = () => {
@@ -36,7 +35,6 @@ const Turismo = () => {
     
     return (
         <div className='form'>
-            <Link to='/home'><button>Home</button></Link>
             <form onSubmit={() => {dispatch(AgrAct(input, paises))}}>
             <div>
                 <input type='text' placeholder='Name for activity' className='nam' name='name' onChange={handle} value={input.name} required/>

@@ -1,19 +1,19 @@
-import {INGRESO, DETALLE, PAG, BUSCADO, ALL, CONT, TURISM, TURISMALL, ASCPOB, DESCPOB, ASCABC,DESCABC, LIST} from './actionName'
+import {DETALLE, BUSCADO, ALL, CONT, TURISM, TURISMALL, ASCPOB, DESCPOB, ASCABC,DESCABC} from './actionName'
 import axios from 'axios'
 
-export function Ingreso() {
-    return async (dispatch) => {
-        const {data} = await axios.get(`http://localhost:3001/countries`)
-        dispatch({type: INGRESO, payload: data})
-    }
-}
-
-export function Pag(props) {
-    return async (dispatch) => {
-        const {data} = await axios.get(`http://localhost:3001/countries?p=${props}`)
-        dispatch({type: PAG, payload: data})
-    }
-}
+// export function Ingreso() {
+//     return async (dispatch) => {
+//         const {data} = await axios.get(`http://localhost:3001/countries`)
+//         dispatch({type: INGRESO, payload: data})
+//     }
+// }
+// 
+// export function Pag(props) {
+//     return async (dispatch) => {
+//         const {data} = await axios.get(`http://localhost:3001/countries?p=${props}`)
+//         dispatch({type: PAG, payload: data})
+//     }
+// }
 
 export function Detalle(payload) {
     return async(dispatch) => {
@@ -45,7 +45,7 @@ export function TurAll(){
 
 export function Tur(props) {
     return async(dispatch) => {
-        const {data} = await axios.get(`http://localhost:3001/activities?tur=${props}`)
+        const {data} = await axios.get(`http://localhost:3001/countries?tur=${props}`)
         dispatch({type: TURISM, payload: data})
     }
 }
@@ -106,10 +106,8 @@ export function DescAbc(props){
 }
 
 export function AgrAct(props, paises) {
-    return (dispatch) => {
+    return () => {
     let body = {...props, paises}
     body = JSON.stringify(body)
     axios({method: 'post', url: "http://localhost:3001/activities/new",headers: {'Content-Type': 'application/json'} , data: body}) 
-    .then(window.location.href = "http://localhost:3000/home")
-    .then(dispatch({type:LIST}))
 }}
