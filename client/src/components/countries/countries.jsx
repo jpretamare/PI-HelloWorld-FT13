@@ -8,6 +8,7 @@ const Countries = () => {
     const [numPag, setNumPag] = useState(1)
     const countries = useSelector(state => state.conRed.countries)
     const dispatch = useDispatch()
+    let todos
 
     useEffect(() => {
         if (countries.length === 0) {
@@ -19,12 +20,7 @@ const Countries = () => {
         }
     }, [countries])
 
-    let ren
-    if (numPag*10 > countries.length){
-        ren = countries.slice(countries.length-10, countries.length)
-    } else {
-        ren = countries.slice((numPag*10)-10, numPag*10)
-    }
+    numPag*10 > countries.length ? todos = countries.slice(countries.length-10, countries.length): todos = countries.slice((numPag*10)-10, numPag*10)
 
     return (
         <div className='render'>
@@ -35,8 +31,8 @@ const Countries = () => {
             </div>
             <div className='todos'>
                 {
-                ren &&
-                ren.map((c, index) => (
+                todos &&
+                todos.map((c, index) => (
                 <Card index={index} name={c.name} id={c.id}  img={c.img} continent={c.continent} />
                 ))
                 }

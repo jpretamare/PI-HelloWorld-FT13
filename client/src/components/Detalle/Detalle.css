@@ -1,0 +1,39 @@
+.backgroundDet {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items:center;
+    
+  } 
+
+.backgroundDet.center {
+    justify-content: space-around;
+    color: #ffffff;
+    padding: 1rem;   
+}
+
+.car {
+    border: 0.1rem #000000 solid;
+    background-color: #f8f8f8;
+    border-radius: 1rem;
+    margin: 1.8rem;
+    margin-top: 4rem;
+    text-decoration: none;
+    width: 14em;
+    height: 18em;
+    padding: 3em;
+  }
+  
+  .car-body > * {
+    margin: 0.5rem;
+    color: #000000;
+    text-align: center;
+    
+  } 
+
+
+.car-body .inf {
+    font-size: 1.5rem;
+    padding: 0rem 0;
+    text-decoration: none;
+  }

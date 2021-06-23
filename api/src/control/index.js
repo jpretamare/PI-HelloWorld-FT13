@@ -98,8 +98,6 @@ const activ = async(req,res) => {
 const tur = async(req,res) => {
     try {
         asd = await Turism.findAll()
-        console.log(asd)
-        // if (asd.length === 0) {return res.status(400).json({message: 'Bad Request'})}
         return res.status(200).json(asd)
     } catch {
         return res.status(500).json({message: 'Internal Server Error'})
@@ -124,10 +122,21 @@ const connect = async (req, res) => {
     }
 }
 
+const puro = async(req, res) => {
+    try {
+        const {data} = await axios('https://restcountries.eu/rest/v2/all')
+        return res.status(200).json(data)
+    }
+    catch {
+        return res.status(418).send({meesage: 'soy una tetera', status:418})
+    }
+} 
+
 module.exports = {
     get,
     pais,
     activ,
+    puro,
     tur,
     connect
 }

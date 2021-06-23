@@ -1,0 +1,32 @@
+.r {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items:center;
+    
+  } 
+
+.ca {
+    border: 0.1rem #000000 solid;
+    background-color: #f8f8f8;
+    border-radius: 1rem;
+    margin: 1.8rem;
+    margin-top: 4rem;
+    text-decoration: none;
+    width: 14em;
+    height: 18em;
+    padding: 3em;
+  }
+  
+  .ca-body > * {
+    margin: 0.5rem;
+    color: #000000;
+    text-align: center;
+    
+  }
+
+.ca-body h4 {
+    font-size: 1.4rem;
+    padding: 0rem 0;
+    text-decoration: none;
+  }
