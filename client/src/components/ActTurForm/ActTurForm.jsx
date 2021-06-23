@@ -36,6 +36,7 @@ const Turismo = () => {
     return (
         <div className='form'>
             <form onSubmit={() => {dispatch(AgrAct(input, paises))}}>
+                <h3>Create new activity</h3>
             <div>
                 <input type='text' placeholder='Name for activity' className='nam' name='name' onChange={handle} value={input.name} required/>
             </div>

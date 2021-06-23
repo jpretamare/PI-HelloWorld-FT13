@@ -29,9 +29,9 @@ const Countries = () => {
     return (
         <div className='render'>
             <div className='bottons'>
-                <button className='ant' onClick={()=>{numPag-1 === 0 ? setNumPag(1) : setNumPag(numPag-1)}}>Anterior</button>
-                <button>{numPag}</button>
-                <button className='sig' onClick={()=>{(numPag+1)*10 > countries.length ? setNumPag(numPag) : setNumPag(numPag+1)}}>Siguiente</button>
+                <button className='bt' onClick={()=>{numPag-1 === 0 ? setNumPag(1) : setNumPag(numPag-1)}}>Anterior</button>
+                <button className='bt'>{numPag}</button>
+                <button className='bt' onClick={()=>{(numPag+1)*10 > countries.length ? setNumPag(numPag) : setNumPag(numPag+1)}}>Siguiente</button>
             </div>
             <div className='todos'>
                 {
@@ -42,9 +42,9 @@ const Countries = () => {
                 }
             </div>
             <div className='bottons'>
-                <button className='ant' onClick={()=>{numPag-1 === 0 ? setNumPag(1) : setNumPag(numPag-1)}}>Anterior</button>
-                <button>{numPag}</button>
-                <button className='sig' onClick={()=>{(numPag+1)*10 > countries.length ? setNumPag(numPag) : setNumPag(numPag+1)}}>Siguiente</button>
+                <button className='bt' onClick={()=>{numPag-1 === 0 ? setNumPag(1) : setNumPag(numPag-1)}}>Anterior</button>
+                <button className='bt'>{numPag}</button>
+                <button className='bt' onClick={()=>{(numPag+1)*10 > countries.length ? setNumPag(numPag) : setNumPag(numPag+1)}}>Siguiente</button>
             </div>
         </div>
     )
